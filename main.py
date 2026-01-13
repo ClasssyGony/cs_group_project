@@ -1,6 +1,11 @@
 import pygame
 from support.button import Button
 
+# Makeing the word list
+wordList = []
+with open("wordlist.txt", 'r') as file:
+    input = file.read().splitlines()
+
 pygame.init()
 screen = pygame.display.set_mode((1280, 720))
 clock = pygame.time.Clock()
