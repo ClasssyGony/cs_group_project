@@ -31,7 +31,12 @@ codedWord, chosenWord = pickWord(wordList)
 font = pygame.font.Font("freesansbold.ttf", 32)
 black = 0, 0, 0
 white = 255, 255, 255
-displayedCodedWord = font.render(codedWord, True, black, white)
+
+#setting up code word for display
+for i in range(len(codedWord)):
+    temp = codedWord
+
+displayedCodedWord = font.render(' '.join(codedWord), True, black, white)
 codedWordRect = displayedCodedWord.get_rect()
 codedWordRect.center = (640, 300)
 

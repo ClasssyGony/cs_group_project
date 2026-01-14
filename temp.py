@@ -9,12 +9,12 @@ def pickWord(wordList):
     chosenWord = random.choice(wordList)
     codedWord = ""
     for i in range(len(chosenWord)):
-        codedWord = codedWord + "_"
+        codedWord = codedWord + "_ "
     return codedWord, chosenWord
 
 def checkInput(userInput, chosenWord, codedWord):
     correct = False
-    for i in range(len(chosenWord)):
+    for i in range(0, len(chosenWord), 1):
         if userInput == chosenWord[i]:
             temp = codedWord[:i] + userInput + codedWord[i+1:]
             codedWord = temp
