@@ -14,8 +14,8 @@ while running:
         if event.type == pygame.QUIT:
             running = False
     
-    #Update button
-    button1.update(screen)
+    #Update button                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              AA
+    button1.update(screen,pygame.mouse)
 
     clock.tick(120)
     
