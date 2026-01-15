@@ -1,6 +1,6 @@
 import pygame
 from support.button import Button
-from support.managingWord import pickWord, checkInput, wordList, display_surface, displayedCodedWord, codedWordRect, displayRealWord, white
+from support.managingWord import pickWord, checkInput, wordList, display_surface, displayedCodedWord, codedWordRect, displayRealWord
 
 pygame.init()
 width = 1280

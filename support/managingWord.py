@@ -28,27 +28,20 @@ def checkInput(userInput, chosenWord):
     
     return codedWord, correct
 
-#displaying the coded word
-# stuff for text
+#Displaying text
 pygame.font.init()
-
-
-
-
 
 # stuff for text
 display_surface = pygame.display.set_mode((1280, 730))
 codedWord, chosenWord = pickWord(wordList)
 font = pygame.font.Font("freesansbold.ttf", 32)
-black = 0, 0, 0
-white = 255, 255, 255
 
 #setting up code word for display
-displayedCodedWord = font.render(' '.join(codedWord), True, black, white)
+displayedCodedWord = font.render(' '.join(codedWord), True, (0, 0, 0), (255, 255, 255))
 codedWordRect = displayedCodedWord.get_rect()
 codedWordRect.center = (750, 125)
 
 #showing the real word to make it easier
-displayRealWord = font.render(chosenWord, True, black, white)
+displayRealWord = font.render(chosenWord, True, (0, 0, 0), (255, 255, 255))
 displayReadWordRect = displayRealWord.get_rect()
 displayReadWordRect.center = (30, 30)
