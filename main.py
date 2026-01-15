@@ -1,5 +1,5 @@
 import pygame
-from support.button import Button
+from support.button import KEYPAD
 
 pygame.init()
 screen = pygame.display.set_mode((1280, 720))
@@ -7,7 +7,7 @@ clock = pygame.time.Clock()
 running = True
 
 #Test Button
-button1 = Button(screen, 100,100, (255,255,255))
+keypad = KEYPAD(screen)
 
 while running:
     for event in pygame.event.get():
@@ -15,7 +15,7 @@ while running:
             running = False
     
     #Update button                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              AA
-    button1.update(screen,pygame.mouse)
+    keypad.update(screen,pygame.mouse)
 
     clock.tick(120)
     
