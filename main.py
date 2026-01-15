@@ -19,8 +19,10 @@ button1 = Button(screen, 100,100, (255,255,255))
 
 #pick random word
 def pickWord(wordList):
+    global codedWord
     chosenWord = random.choice(wordList)
     codedWord = ""
+    print(chosenWord)
     for i in range(len(chosenWord)):
         codedWord = codedWord + "_"
     return codedWord, chosenWord
@@ -33,9 +35,6 @@ black = 0, 0, 0
 white = 255, 255, 255
 
 #setting up code word for display
-for i in range(len(codedWord)):
-    temp = codedWord
-
 displayedCodedWord = font.render(' '.join(codedWord), True, black, white)
 codedWordRect = displayedCodedWord.get_rect()
 codedWordRect.center = (640, 300)
@@ -45,7 +44,8 @@ displayRealWord = font.render(chosenWord, True, black, white)
 displayReadWordRect = displayRealWord.get_rect()
 displayReadWordRect.center = (30, 30)
 
-def checkInput(userInput, chosenWord, codedWord):
+def checkInput(userInput, chosenWord):
+    global codedWord
     correct = False
     for i in range(len(chosenWord)):
         if userInput == chosenWord[i]:
@@ -59,6 +59,7 @@ codedWord, chosenWord = pickWord(wordList)
 
 # codedWord, correct = checkInput(userInput, chosenWord, codedWord)
 
+
 while running:
     # showing the coded word
     display_surface.fill(white)
@@ -71,6 +72,10 @@ while running:
         if event.type == pygame.QUIT:
             running = False
     
+    userInput = input("Enter a letter: ")
+    codeWord, correct = checkInput(userInput, chosenWord)
+    print(' '.join(codeWord))
+
     #Update button
     button1.update(screen)
 
