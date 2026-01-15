@@ -9,7 +9,7 @@ screen = pygame.display.set_mode((width, height))
 clock = pygame.time.Clock()
 running = True
 
-codedWord, chosenWord = pickWord(wordList)
+#codedWord, chosenWord = pickWord(wordList)
 
 while running:
     # showing the coded word
