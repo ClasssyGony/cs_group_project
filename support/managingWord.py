@@ -26,7 +26,19 @@ def checkInput(userInput, chosenWord):
             codedWord = temp
             correct = True
     
-    return codedWord, correct
+    #Checking weather the user has won the game
+    count = 0
+    finished = False
+    for i in range(len(chosenWord)):
+        if chosenWord[i] == codedWord[i]:
+            count = count + 1
+    
+    if count == len(chosenWord):
+        finished = True
+    return codedWord, correct, finished
+
+
+
 
 #Displaying text
 pygame.font.init()

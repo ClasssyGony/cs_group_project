@@ -23,9 +23,7 @@ while running:
         if event.type == pygame.QUIT:
             running = False
     
-
-    #codeWord, correct = checkInput(userInput, chosenWord)
-
+    #codeWord, correct, win = checkInput(userInput, chosenWord)
 
     clock.tick(120)
     
