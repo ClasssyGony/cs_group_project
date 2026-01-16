@@ -1,5 +1,5 @@
 import pygame
-from support.button import Button
+from support.button import KEYPAD
 from support.managingWord import pickWord, checkInput, wordList, display_surface, displayedCodedWord, codedWordRect, displayRealWord
 
 pygame.init()
@@ -9,6 +9,8 @@ screen = pygame.display.set_mode((width, height))
 clock = pygame.time.Clock()
 running = True
 
+#Test Button
+keypad = KEYPAD(screen)
 #codedWord, chosenWord = pickWord(wordList)
 
 while running:
@@ -25,6 +27,7 @@ while running:
     
     #codeWord, correct, win = checkInput(userInput, chosenWord)
     #Update button                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              AA
+    keypad.update(screen,pygame.mouse)
     #button1.update(screen,pygame.mouse)
 
     clock.tick(120)
