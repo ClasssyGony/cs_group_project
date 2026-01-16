@@ -25,7 +25,7 @@ while running:
     
     #codeWord, correct, win = checkInput(userInput, chosenWord)
     #Update button                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              AA
-    button1.update(screen,pygame.mouse)
+    #button1.update(screen,pygame.mouse)
 
     clock.tick(120)
     
