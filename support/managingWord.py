@@ -6,6 +6,8 @@ wordList = []
 with open("wordlist.txt", 'r') as file:
     wordList = file.read().splitlines()
 
+for word in wordList: word = word.lower()
+
 #picking the word
 def pickWord(wordList):
     global codedWord
@@ -25,6 +27,7 @@ def checkInput(userInput, chosenWord):
             temp = codedWord[:i] + userInput + codedWord[i+1:]
             codedWord = temp
             correct = True
+            print("OOOOGA BOOGA")
     
     #Checking weather the user has won the game
     count = 0

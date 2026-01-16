@@ -11,7 +11,7 @@ running = True
 
 #Test Button
 keypad = KEYPAD(screen)
-#codedWord, chosenWord = pickWord(wordList)
+codedWord, chosenWord = pickWord(wordList)
 
 while running:
     # showing the coded word
@@ -25,7 +25,9 @@ while running:
         if event.type == pygame.QUIT:
             running = False
     
-    #codeWord, correct, win = checkInput(userInput, chosenWord)
+    userInput = keypad.update(screen,pygame.mouse)
+
+    codeWord, correct, win = checkInput(userInput, chosenWord)
     #Update button                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              AA
     keypad.update(screen,pygame.mouse)
     #button1.update(screen,pygame.mouse)
