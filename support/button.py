@@ -62,3 +62,6 @@ class KEYPAD:
 
 #Changes 14/01/26
 # Added comments to explain the class
+
+#Changes 15/1/26
+# Added keypad class
