@@ -36,7 +36,8 @@ class Button:
         # Check if mouse clicked condition has been achived
         if self.checkMouseClick(mouse) and self.pressed != False:
             # Present Output
-            print(self.value)
+            return True
+        
 
 """ KEYPAD CLASS """
 class KEYPAD:
@@ -51,14 +52,23 @@ class KEYPAD:
         for index, rows in enumerate(self.layout):
             startingPos = [self.pos[0],self.pos[1]+index*(self.buttonsize[1]+5)]
             for index1, letter in enumerate(rows):
-                button = Button(surface,self.buttonsize[0],self.buttonsize[1],(255,255,255),(startingPos[0]+index1*(self.buttonsize[0]+5),startingPos[1]),letter)
+                button = Button(surface,self.buttonsize[0],self.buttonsize[1],"Black",(startingPos[0]+index1*(self.buttonsize[0]+5),startingPos[1]),letter)
 
                 self.buttons.append(button)
 
     def update(self,surface,mouse):
+        value = " "
         for button in self.buttons:
-            button.update(surface,mouse)
+            if button.update(surface,mouse):
+                if value == " ":
+                    value = button.value.lower()
+        
+
+        return value
 
 
 #Changes 14/01/26
 # Added comments to explain the class
+
+#Changes 15/1/26
+# Added keypad class

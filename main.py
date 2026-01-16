@@ -1,31 +1,32 @@
 import pygame
 from support.button import KEYPAD
-from support.managingWord import pickWord, checkInput, wordList, display_surface, displayedCodedWord, codedWordRect, displayRealWord
+from support.managingWord import *
 
 pygame.init()
+pygame.font.init()
 width = 1280
 height = 720
 screen = pygame.display.set_mode((width, height))
 clock = pygame.time.Clock()
 running = True
-
+font = pygame.font.Font("freesansbold.ttf", 32)
 #Test Button
 keypad = KEYPAD(screen)
-#codedWord, chosenWord = pickWord(wordList)
+
 
 while running:
     # showing the coded word
-    display_surface.fill((255, 255, 255))
-    display_surface.blit(displayedCodedWord, codedWordRect)
+    displayWord(screen,font)
 
-    # showing the real word
-    display_surface.blit(displayRealWord)
 
+    
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
     
-    #codeWord, correct, win = checkInput(userInput, chosenWord)
+    userInput = keypad.update(screen,pygame.mouse)
+
+    codeWord, correct, win = checkInput(userInput, chosenWord)
     #Update button                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              AA
     keypad.update(screen,pygame.mouse)
     #button1.update(screen,pygame.mouse)
