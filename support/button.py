@@ -42,7 +42,7 @@ class Button:
 """ KEYPAD CLASS """
 class KEYPAD:
     def __init__(self,surface):
-        self.pos = [100,100]
+        self.pos = [367,500]
         self.layout = [["Q","W","E","R","T","Y","U","I","O","P"],["A","S","D","F","G","H","J","K","L"],["Z","X","C","V","B","N","M"]]
         self.buttonsize = [50,65]
         self.keypad_rect = [545,205] # [width, height]
@@ -52,7 +52,17 @@ class KEYPAD:
         for index, rows in enumerate(self.layout):
             startingPos = [self.pos[0],self.pos[1]+index*(self.buttonsize[1]+5)]
             for index1, letter in enumerate(rows):
-                button = Button(surface,self.buttonsize[0],self.buttonsize[1],"Black",(startingPos[0]+index1*(self.buttonsize[0]+5),startingPos[1]),letter)
+                xpos = startingPos[0]+index1*(self.buttonsize[0]+5)
+                if index == 1:
+                    xpos = startingPos[0]+index1*(self.buttonsize[0]+5)+30
+                if index == 2:
+                    xpos = startingPos[0]+index1*(self.buttonsize[0]+5) + 85
+                button = Button(surface,
+                                self.buttonsize[0],
+                                self.buttonsize[1],
+                                "Black",
+                                (xpos,startingPos[1]),
+                                letter)
 
                 self.buttons.append(button)
 

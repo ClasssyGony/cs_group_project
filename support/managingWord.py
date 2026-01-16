@@ -26,8 +26,6 @@ def pickWord(wordList):
 def checkInput(userInput, chosenWord):
     global codedWord
     correct = False
-    if userInput != " ":
-        print(userInput)
     for i in range(len(chosenWord)):
         if userInput == chosenWord[i]:
             temp = codedWord[:i] + userInput + codedWord[i+1:]
@@ -45,15 +43,9 @@ def checkInput(userInput, chosenWord):
         finished = True
     return codedWord, correct, finished
 
-
-
-
-
-
 codedWord, chosenWord = pickWord(wordList)
     
 
-    
 def displayWord(screen,font):
     #setting up code word for display
     displayedCodedWord = font.render(' '.join(codedWord), True, (0, 0, 0), (255, 255, 255))
