@@ -1,12 +1,16 @@
 import random
 import pygame
+import time
 
 #word list
 wordList = []
 with open("wordlist.txt", 'r') as file:
-    wordList = file.read().splitlines()
+    words = file.read().splitlines()
+    for word in words:
+        wordList.append(word.lower())
 
-for word in wordList: word = word.lower()
+    
+
 
 #picking the word
 def pickWord(wordList):
@@ -22,12 +26,13 @@ def pickWord(wordList):
 def checkInput(userInput, chosenWord):
     global codedWord
     correct = False
+    if userInput != " ":
+        print(userInput)
     for i in range(len(chosenWord)):
         if userInput == chosenWord[i]:
             temp = codedWord[:i] + userInput + codedWord[i+1:]
             codedWord = temp
             correct = True
-            print("OOOOGA BOOGA")
     
     #Checking weather the user has won the game
     count = 0
@@ -43,20 +48,23 @@ def checkInput(userInput, chosenWord):
 
 
 
-#Displaying text
-pygame.font.init()
 
-# stuff for text
-display_surface = pygame.display.set_mode((1280, 730))
+
 codedWord, chosenWord = pickWord(wordList)
-font = pygame.font.Font("freesansbold.ttf", 32)
+    
 
-#setting up code word for display
-displayedCodedWord = font.render(' '.join(codedWord), True, (0, 0, 0), (255, 255, 255))
-codedWordRect = displayedCodedWord.get_rect()
-codedWordRect.center = (750, 125)
+    
+def displayWord(screen,font):
+    #setting up code word for display
+    displayedCodedWord = font.render(' '.join(codedWord), True, (0, 0, 0), (255, 255, 255))
+    codedWordRect = displayedCodedWord.get_rect()
+    codedWordRect.center = (750, 125)
 
-#showing the real word to make it easier
-displayRealWord = font.render(chosenWord, True, (0, 0, 0), (255, 255, 255))
-displayReadWordRect = displayRealWord.get_rect()
-displayReadWordRect.center = (30, 30)
+    #showing the real word to make it easier
+    displayRealWord = font.render(chosenWord, True, (0, 0, 0), (255, 255, 255))
+    displayReadWordRect = displayRealWord.get_rect()
+    displayReadWordRect.center = (30, 30)
+
+    screen.fill((255, 255, 255))
+    screen.blit(displayedCodedWord, codedWordRect)
+    screen.blit(displayRealWord)

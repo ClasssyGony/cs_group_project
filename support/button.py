@@ -36,7 +36,7 @@ class Button:
         # Check if mouse clicked condition has been achived
         if self.checkMouseClick(mouse) and self.pressed != False:
             # Present Output
-            return self.value.lower()
+            return True
         
 
 """ KEYPAD CLASS """
@@ -57,10 +57,13 @@ class KEYPAD:
                 self.buttons.append(button)
 
     def update(self,surface,mouse):
-        value = ""
+        value = " "
         for button in self.buttons:
-            value = button.update(surface,mouse)
+            if button.update(surface,mouse):
+                if value == " ":
+                    value = button.value.lower()
         
+
         return value
 
 
