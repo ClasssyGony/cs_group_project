@@ -11,7 +11,7 @@ def pickWord(wordList):
     global codedWord
     chosenWord = random.choice(wordList)
     codedWord = ""
-    print(chosenWord)
+   # print(chosenWord)
     for i in range(len(chosenWord)):
         codedWord = codedWord + "_"
     return codedWord, chosenWord
