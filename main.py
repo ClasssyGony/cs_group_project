@@ -1,26 +1,35 @@
 import pygame
-from support.button import Button
-
-# Makeing the word list
-wordList = []
-with open("wordlist.txt", 'r') as file:
-    input = file.read().splitlines()
+from support.button import KEYPAD
+from support.managingWord import *
 
 pygame.init()
-screen = pygame.display.set_mode((1280, 720))
+pygame.font.init()
+width = 1280
+height = 720
+screen = pygame.display.set_mode((width, height))
 clock = pygame.time.Clock()
 running = True
-
+font = pygame.font.Font("freesansbold.ttf", 32)
 #Test Button
-button1 = Button(screen, 100,100, (255,255,255))
+keypad = KEYPAD(screen)
+
 
 while running:
+    # showing the coded word
+    displayWord(screen,font)
+
+
+    
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
     
+    userInput = keypad.update(screen,pygame.mouse)
+
+    codeWord, correct, win = checkInput(userInput, chosenWord)
     #Update button                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              AA
-    button1.update(screen,pygame.mouse)
+    keypad.update(screen,pygame.mouse)
+    #button1.update(screen,pygame.mouse)
 
     clock.tick(120)
     
