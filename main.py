@@ -10,9 +10,7 @@ screen = pygame.display.set_mode((width, height))
 clock = pygame.time.Clock()
 running = True
 font = pygame.font.Font("freesansbold.ttf", 32)
-#Test Button
-keypad = KEYPAD(screen)
-
+keypad = KEYPAD(screen,font)
 
 while running:
     # showing the coded word

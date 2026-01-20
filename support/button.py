@@ -1,7 +1,7 @@
 import pygame
 
 class Button:
-    def __init__(self,surface, width, height, colour, pos, value):
+    def __init__(self,surface, width, height, colour, pos, value, font):
 
         # Setting up Button variables
         self.width = width
@@ -10,9 +10,11 @@ class Button:
         self.pos =  pos
         self.pressed = False
         self.value = value
+        self.font = font
 
         # New instance of Rect with (left, top, width, height)
         self.rect = pygame.Rect(self.pos[0],self.pos[1],self.width,self.height)
+        self.text = font.render(f"{value}", True, (255, 255, 255))
 
         # Drawing the self.rectObject onto the surface with the colour and settings of self.rect
         self.button = pygame.draw.rect(surface,colour,self.rect)
@@ -32,6 +34,8 @@ class Button:
 
     def update(self,surface,mouse):
         self.button = pygame.draw.rect(surface,self.colour,self.rect)
+        surface.blit(self.text, (self.pos[0]+5,self.pos[1]+5))
+        
 
         # Check if mouse clicked condition has been achived
         if self.checkMouseClick(mouse) and self.pressed != False:
@@ -41,11 +45,12 @@ class Button:
 
 """ KEYPAD CLASS """
 class KEYPAD:
-    def __init__(self,surface):
+    def __init__(self,surface,font):
         self.pos = [367,500]
         self.layout = [["Q","W","E","R","T","Y","U","I","O","P"],["A","S","D","F","G","H","J","K","L"],["Z","X","C","V","B","N","M"]]
         self.buttonsize = [50,65]
         self.keypad_rect = [545,205] # [width, height]
+        self.font = font
 
         self.buttons = []
 
@@ -62,7 +67,8 @@ class KEYPAD:
                                 self.buttonsize[1],
                                 "Black",
                                 (xpos,startingPos[1]),
-                                letter)
+                                letter,
+                                font)
 
                 self.buttons.append(button)
 
