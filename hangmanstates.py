@@ -12,8 +12,30 @@ RED = (255, 0, 0)
 BLACK = (0, 0, 0)
 BLUE = (0, 0, 255)
 
-clock = pygame.time.Clock()
+class HangmanStates:
+    def __init__(self):
 
+        life1 = pygame.image.load("HangmanStates/1.png")
+
+        life2 = pygame.image.load("HangmanStates/2.png")
+
+        life3 = pygame.image.load("HangmanStates/3.png")
+
+        life4 = pygame.image.load("HangmanStates/4.png")
+
+        life5 = pygame.image.load("HangmanStates/5.png")
+
+        life6 = pygame.image.load("HangmanStates/6.png")
+
+        self.HangmanStates = [life1, life2, life3, life4, life5, life6]
+
+    def update(self):
+        for state in self.HangmanStates:
+            screen.blit(state, (50, 85))
+            
+
+clock = pygame.time.Clock()
+hangman = HangmanStates()
 running = True
 while running:
     for event in pygame.event.get():
@@ -28,25 +50,12 @@ while running:
     pygame.draw.rect(screen, BLACK, (160, 25, 365, 25))
 
     pygame.draw.rect(screen, BLACK, (160, 25, 20, 100))
-
-    #these are the states that will be added after each wrong guess
-    #the first set of coordinates determine the centre then the next number determines the radius of the circle
-    pygame.draw.circle(screen, RED, (170, 150), 50)
-
-    pygame.draw.rect(screen, RED, (160, 150, 20, 175))
-
-    #to draw a line you must determine start and then the end positions and the width at the end
-    pygame.draw.line(screen, RED, (175, 315), (290, 425), 15)
-
-    pygame.draw.line(screen, RED, (165, 315), (50, 425), 15)
-
-    pygame.draw.line(screen, RED, (175, 210), (295, 250), 15)
-
-    pygame.draw.line(screen, RED, (165, 210), (55, 250), 15)
     
+    hangman.update()
+
     pygame.display.flip()
 
-    clock.tick(60)
+clock.tick(60)
 
 pygame.quit
 sys.exit
