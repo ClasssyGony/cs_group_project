@@ -22,7 +22,6 @@ while running:
     # showing the coded word
     screen.fill("WHITE")
 
-
     
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
