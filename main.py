@@ -28,9 +28,10 @@ while running:
             running = False
     
     if game_state == "game":
+        
         displayWord(screen,font)
         userInput = keypad.update(screen,pygame.mouse)
-
+        
         codeWord, correct, win = checkInput(userInput, chosenWord)
         #Update button                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              AA
         keypad.update(screen,pygame.mouse)

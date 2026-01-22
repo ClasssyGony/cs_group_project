@@ -9,8 +9,6 @@ with open("wordlist.txt", 'r') as file:
     for word in words:
         wordList.append(word.lower())
 
-    
-
 
 #picking the word
 def pickWord(wordList):
@@ -43,8 +41,8 @@ def checkInput(userInput, chosenWord):
         finished = True
     return codedWord, correct, finished
 
-codedWord, chosenWord = pickWord(wordList)
     
+
 
 def displayWord(screen,font):
     #setting up code word for display
