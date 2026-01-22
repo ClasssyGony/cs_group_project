@@ -30,6 +30,7 @@ def checkInput(userInput, chosenWord):
             codedWord = temp
             correct = True
     
+
     #Checking weather the user has won the game
     count = 0
     finished = False
