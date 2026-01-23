@@ -43,7 +43,6 @@ def checkInput(userInput, chosenWord):
         finished = True
     return codedWord, correct, finished
 
-codedWord, chosenWord = pickWord(wordList)
     
 
 def displayWord(screen,font):
