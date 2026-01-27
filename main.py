@@ -15,8 +15,8 @@ keypad = KEYPAD(screen,font)
 
 homepage = Home(font)
 
-game_state = "home"
-
+game_state = "game"
+pressed = False
 
 while running:
     # showing the coded word
@@ -29,11 +29,11 @@ while running:
     
     if game_state == "game":
         displayWord(screen,font)
-        userInput = keypad.update(screen,pygame.mouse)
+        userInput, pressed = keypad.update(screen,pygame.mouse,pressed)
 
         codeWord, correct, win = checkInput(userInput, chosenWord)
-        #Update button                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              AA
-        keypad.update(screen,pygame.mouse)
+        #Update button
+
         #button1.update(screen,pygame.mouse)
 
     if game_state == "home":
