@@ -13,10 +13,18 @@ class Home:
         self.startButtonH = 76
         self.startButton = Button(screen, self.startButtonW, self.startButtonH, (0, 0, 0), self.startButtonPos, "          START",font)
 
+        self.settingButtonPos = [515, 500]
+        self.settingButtonW = 250
+        self.settingButtonH = 70
+        self.settingButton = Button(screen, self.settingButtonW, self.settingButtonH, (0, 0, 0), self.settingButtonPos, "    SETTINGS", font)
+
 
     def update(self,screen,mouse):
-        if self.startButton.update(screen,mouse):
+        if self.startButton.update(screen, mouse):
             return "Start"
+        
+        if self.settingButton.update(screen, mouse):
+            return 'setts'
         
 
 class Endpage:
@@ -40,3 +48,15 @@ class Endpage:
     
     def newWord(self, word):
         self.chosenWord = word
+
+
+class Settings:
+    def __init__(self, font):
+        self.backButtonPos = [10, 10]
+        self.backButtonH = 49
+        self.backButtonW = 100
+        self.backButton = Button(screen, self.backButtonW, self.backButtonH, (0, 0, 0), self.backButtonPos, "Back", font)
+    
+    def update(self, screen, mouse):
+        if self.backButton.update(screen, mouse):
+            return "home"
