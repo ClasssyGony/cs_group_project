@@ -29,6 +29,12 @@ class Endpage:
         self.endButtonW = 400
         self.endButtonH = 80
         self.endButton = Button(screen, self.endButtonW, self.endButtonH, (0, 0, 0), self.endButtonPos, "Next word", font)
+
+        self.homeButtonPos = [10, 10]
+        self.homeButtonW = 100
+        self.homeButtonH = 50
+
+        self.homeButton = Button(screen, self.homeButtonW, self.endButtonH, (0, 0, 0), self.homeButtonPos, "Home", font)
     
     def displayWord(self, font, word, screen):
         self.chosenWord = word
@@ -40,7 +46,11 @@ class Endpage:
 
     def update(self, screen, mouse,pressed):
         if self.endButton.update(screen, mouse, pressed)[0]:
+            print("hi")
             return "game"
+        if self.homeButton.update(screen, mouse, pressed)[0]:
+            print("by")
+            return( "home")
         
     def newWord(self, word):
         self.chosenWord = word

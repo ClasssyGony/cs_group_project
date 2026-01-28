@@ -62,10 +62,14 @@ while running:
         pressed = False
         endPage.displayWord(font, chosenWord, screen)
         state = endPage.update(screen, pygame.mouse,pressed)
-        if state != None:
+
+        if state == "game":
+            codedWord, chosenWord = pickWord(wordList)
+            pressed = False
+            game_state = "game"
+        if state == "home":
             pressed = False
             game_state = "home"
-        
             codedWord, chosenWord = pickWord(wordList)
 
     if game_state == "settings":
