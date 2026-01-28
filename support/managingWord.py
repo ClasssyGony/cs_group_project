@@ -26,12 +26,16 @@ def pickWord(wordList):
 def checkInput(userInput, chosenWord):
     global codedWord
     correct = False
+    wrong = False
     for i in range(len(chosenWord)):
         if userInput == chosenWord[i]:
             temp = codedWord[:i] + userInput + codedWord[i+1:]
             codedWord = temp
             correct = True
     
+    if userInput != " " and correct == False:
+        wrong = True
+
     #Checking weather the user has won the game
     count = 0
     finished = False
@@ -41,7 +45,8 @@ def checkInput(userInput, chosenWord):
     
     if count == len(chosenWord):
         finished = True
-    return codedWord, correct, finished
+
+    return codedWord, correct, finished, wrong
 
 codedWord, chosenWord = pickWord(wordList)
     
@@ -53,10 +58,10 @@ def displayWord(screen,font):
     codedWordRect.center = (750, 125)
 
     #showing the real word to make it easier
-   # displayRealWord = font.render(chosenWord, True, (0, 0, 0), (255, 255, 255))
-    #displayReadWordRect = displayRealWord.get_rect()
-    #displayReadWordRect.center = (30, 30)
+    displayRealWord = font.render(chosenWord, True, (0, 0, 0), (255, 255, 255))
+    displayReadWordRect = displayRealWord.get_rect()
+    displayReadWordRect.center = (30, 30)
 
     screen.fill((255, 255, 255))
     screen.blit(displayedCodedWord, codedWordRect)
-   # screen.blit(displayRealWord)
+    screen.blit(displayRealWord)
