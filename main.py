@@ -56,6 +56,8 @@ while running:
         if state == "setts":
             pressed = False
             game_state = "settings"
+        if state == "quit":
+            running = False
 
 
     if game_state == "end":

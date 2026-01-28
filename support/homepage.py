@@ -4,15 +4,20 @@ from support.button import Button
 
 class Home:
     def __init__(self,font, screen):
-        self.startButtonPos = [490, 322]
+        self.startButtonPos = [490, 275]
         self.startButtonW = 300
         self.startButtonH = 76
         self.startButton = Button(screen, self.startButtonW, self.startButtonH, (0, 0, 0), self.startButtonPos, "          START",font)
 
-        self.settingButtonPos = [515, 500]
+        self.settingButtonPos = [515, 375]
         self.settingButtonW = 250
         self.settingButtonH = 70
         self.settingButton = Button(screen, self.settingButtonW, self.settingButtonH, (0, 0, 0), self.settingButtonPos, "    SETTINGS", font)
+
+        self.quitButtonPos = [547, 465]
+        self.quitButtonW = 175
+        self.quitButtonH = 60
+        self.quitButton = Button(screen, self.quitButtonW, self.quitButtonH, (0, 0, 0), self.quitButtonPos, "     QUIT", font)
 
 
     def update(self,screen,mouse,pressed):
@@ -21,6 +26,9 @@ class Home:
         
         if self.settingButton.update(screen, mouse, pressed)[0]:
             return 'setts'
+        
+        if self.quitButton.update(screen, mouse, pressed)[0]:
+            return "quit"
         
 
 class Endpage:
@@ -46,10 +54,8 @@ class Endpage:
 
     def update(self, screen, mouse,pressed):
         if self.endButton.update(screen, mouse, pressed)[0]:
-            print("hi")
             return "game"
         if self.homeButton.update(screen, mouse, pressed)[0]:
-            print("by")
             return( "home")
         
     def newWord(self, word):
