@@ -35,12 +35,12 @@ class Endpage:
     def __init__(self, font, word, screen):
         self.endButtonPos = [490,300]
         self.endButtonW = 400
-        self.endButtonH = 80
+        self.endButtonH = 40
         self.endButton = Button(screen, self.endButtonW, self.endButtonH, (0, 0, 0), self.endButtonPos, "Next word", font)
 
         self.homeButtonPos = [10, 10]
         self.homeButtonW = 100
-        self.homeButtonH = 50
+        self.homeButtonH = 30
 
         self.homeButton = Button(screen, self.homeButtonW, self.endButtonH, (0, 0, 0), self.homeButtonPos, "Home", font)
     
