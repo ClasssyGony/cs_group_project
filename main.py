@@ -13,17 +13,18 @@ running = True
 font = pygame.font.Font("freesansbold.ttf", 32)
 keypad = KEYPAD(screen,font)
 
-
-
 game_state = "home"
 
 codedWord, chosenWord = pickWord(wordList)
 
-homepage = Home(font)
-endPage = Endpage(font, chosenWord)
-settingsPage = Settings(font)
+homepage = Home(font, screen)
+endPage = Endpage(font, chosenWord, screen)
+settingsPage = Settings(font, screen)
+
+pressed = False
 
 while running:
+    
     # showing the coded word
     screen.fill("WHITE")
 
@@ -34,36 +35,44 @@ while running:
    
     if game_state == "game":
         
-        displayWord(screen,font)
-        userInput = keypad.update(screen,pygame.mouse)
+        displayWord(screen,font,chosenWord)
+        userInput, pressed = keypad.update(screen,pygame.mouse,pressed)
         correct = False
         codeWord, correct, win = checkInput(userInput, chosenWord)
 
         if win:
             game_state = "end"
+            pressed = False
             endPage.newWord(chosenWord)
 
-        #Update button                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              AA
-        keypad.update(screen,pygame.mouse)
+        #Update button
         #button1.update(screen,pygame.mouse)
 
     if game_state == "home":
-        state = state = homepage.update(screen,pygame.mouse)
+        state = homepage.update(screen,pygame.mouse,pressed)
         if state == "Start":
+            pressed = False
             game_state = "game"
         if state == "setts":
+            pressed = False
             game_state = "settings"
 
 
     if game_state == "end":
-        endPage.displayWord(font, chosenWord)
-        if endPage.update(screen, pygame.mouse) == "next":
-            game_state = "game"
+        pressed = False
+        endPage.displayWord(font, chosenWord, screen)
+        state = endPage.update(screen, pygame.mouse,pressed)
+        if state != None:
+            pressed = False
+            game_state = "home"
+        
             codedWord, chosenWord = pickWord(wordList)
 
     if game_state == "settings":
-        if settingsPage.update(screen, pygame.mouse) == "home":
+        pressed = False
+        if settingsPage.update(screen, pygame.mouse,pressed) == "home":
             game_state = "home"
+
 
 
     clock.tick(120)

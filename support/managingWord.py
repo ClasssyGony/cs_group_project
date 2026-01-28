@@ -45,17 +45,29 @@ def checkInput(userInput, chosenWord):
 
     
 
-def displayWord(screen,font):
+def displayWord(screen,font,chosenWord):
     #setting up code word for display
     displayedCodedWord = font.render(' '.join(codedWord), True, (0, 0, 0), (255, 255, 255))
     codedWordRect = displayedCodedWord.get_rect()
     codedWordRect.center = (750, 125)
 
     #showing the real word to make it easier
-   # displayRealWord = font.render(chosenWord, True, (0, 0, 0), (255, 255, 255))
-    #displayReadWordRect = displayRealWord.get_rect()
-    #displayReadWordRect.center = (30, 30)
+    displayRealWord = font.render(chosenWord, True, (0, 0, 0), (255, 255, 255))
+    displayReadWordRect = displayRealWord.get_rect()
+    displayReadWordRect.center = (30, 30)
 
     screen.fill((255, 255, 255))
     screen.blit(displayedCodedWord, codedWordRect)
-   # screen.blit(displayRealWord)
+    screen.blit(displayRealWord)
+
+def getMouseClick(pressed):
+    if pygame.mouse.get_pressed()[0] and pressed == False:
+        pressed = True
+        mousePos = pygame.mouse.get_pos()
+        return mousePos, pressed
+
+    if pygame.mouse.get_pressed()[0] == False:
+        pressed = False
+        return (0,0),pressed
+    
+    return (0,0), pressed
