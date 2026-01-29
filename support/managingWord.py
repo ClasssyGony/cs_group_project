@@ -26,11 +26,15 @@ def pickWord(wordList):
 def checkInput(userInput, chosenWord):
     global codedWord
     correct = False
+    wrong = False
     for i in range(len(chosenWord)):
         if userInput == chosenWord[i]:
             temp = codedWord[:i] + userInput + codedWord[i+1:]
             codedWord = temp
             correct = True
+
+    if userInput != " " and correct == False:
+        wrong = True
     
     #Checking weather the user has won the game
     count = 0
@@ -41,7 +45,7 @@ def checkInput(userInput, chosenWord):
     
     if count == len(chosenWord):
         finished = True
-    return codedWord, correct, finished
+    return codedWord, correct, finished, wrong
 
     
 
@@ -58,7 +62,7 @@ def displayWord(screen,font,chosenWord):
 
     screen.fill((255, 255, 255))
     screen.blit(displayedCodedWord, codedWordRect)
-    screen.blit(displayRealWord)
+    #screen.blit(displayRealWord)
 
 def getMouseClick(pressed):
     if pygame.mouse.get_pressed()[0] and pressed == False:
