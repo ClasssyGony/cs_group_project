@@ -39,7 +39,6 @@ while running:
         pygame.draw.rect(screen, BLACK, (160, 25, 20, 100))
 
         
-        
 
         codeWord, correct, win, wrong = checkInput(userInput, chosenWord)
         if wrong:

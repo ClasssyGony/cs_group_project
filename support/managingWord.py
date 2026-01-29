@@ -33,6 +33,7 @@ def checkInput(userInput, chosenWord):
             codedWord = temp
             correct = True
     
+
     if userInput != " " and correct == False:
         wrong = True
 
@@ -45,8 +46,7 @@ def checkInput(userInput, chosenWord):
     
     if count == len(chosenWord):
         finished = True
-
-    return codedWord, correct, finished, wrong
+    return codedWord, correct, finished
 
 codedWord, chosenWord = pickWord(wordList)
     
