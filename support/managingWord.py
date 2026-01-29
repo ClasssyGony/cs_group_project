@@ -62,7 +62,7 @@ def displayWord(screen,font,chosenWord):
 
     screen.fill((255, 255, 255))
     screen.blit(displayedCodedWord, codedWordRect)
-    screen.blit(displayRealWord)
+    #screen.blit(displayRealWord)
 
 def getMouseClick(pressed):
     if pygame.mouse.get_pressed()[0] and pressed == False:

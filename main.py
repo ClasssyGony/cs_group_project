@@ -56,6 +56,8 @@ while running:
             lives -= 1
 
         if lives <= 0:
+            codedWord, chosenWord = pickWord(wordList)
+            keypad.reset()
             lives = 6
             game_state = "home"
 
@@ -79,9 +81,11 @@ while running:
     if game_state == "end":
         endPage.displayWord(font, chosenWord, screen)
         state = endPage.update(screen, pygame.mouse,mousePos,pressed)
+        keypad.reset()
 
         if state == "game":
             codedWord, chosenWord = pickWord(wordList)
+            
             game_state = "game"
         if state == "home":
             game_state = "home"
