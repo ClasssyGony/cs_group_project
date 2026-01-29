@@ -19,25 +19,24 @@ class Button:
         # Drawing the self.rectObject onto the surface with the colour and settings of self.rect
         self.button = pygame.draw.rect(surface,colour,self.rect)
 
-    def checkMouseClick(self,mouse,pressed):
-        mousePos, pressed = getMouseClick(pressed)
+    def checkMouseClick(self,mouse,mousePos,pressed):
         
         # This is to check if the mouse button was inactive and is now active in the correct defined regions
         if pressed != False and mouse.get_just_pressed()[0] == True and mousePos[0] > self.pos[0] and mousePos[0] < self.pos[0] + self.width and mousePos[1] > self.pos[1] and mousePos[1] < self.pos[1] + self.height:
-            return True, pressed
+            return True
 
-        return False, pressed
+        return False
 
-    def update(self,surface,mouse,pressed):
+    def update(self,surface,mouse,mousePos,pressed):
         self.button = pygame.draw.rect(surface,self.colour,self.rect)
         surface.blit(self.text, (self.pos[0]+5,self.pos[1]+5))
         
         # Check if mouse clicked condition has been achived
-        i, j = self.checkMouseClick(mouse,pressed)
-        if i and j != False:
+        i = self.checkMouseClick(mouse,mousePos,pressed)
+        if i and pressed != False:
             # Present Output
-            return True, j
-        return False, j
+            return True
+        return False
     
 
 """ KEYPAD CLASS """
@@ -69,16 +68,16 @@ class KEYPAD:
 
                 self.buttons.append(button)
 
-    def update(self,surface,mouse,pressed):
+    def update(self,surface,mouse,mousePos,pressed):
         value = " "
         for button in self.buttons:
-            i, j = button.update(surface,mouse,pressed)
+            i = button.update(surface,mouse,mousePos,pressed)
             if i:
                 if value == " ":
                     value = button.value.lower()
         
 
-        return value, j
+        return value
 
 
 #Changes 14/01/26

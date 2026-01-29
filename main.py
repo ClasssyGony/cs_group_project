@@ -33,50 +33,45 @@ while running:
         if event.type == pygame.QUIT:
             running = False
    
+    mousePos, pressed = getMouseClick(pressed)
+
     if game_state == "game":
         
         displayWord(screen,font,chosenWord)
-        userInput, pressed = keypad.update(screen,pygame.mouse,pressed)
+        userInput = keypad.update(screen,pygame.mouse,mousePos,pressed)
         correct = False
         codeWord, correct, win = checkInput(userInput, chosenWord)
 
         if win:
             game_state = "end"
-            pressed = False
             endPage.newWord(chosenWord)
 
         #Update button
         #button1.update(screen,pygame.mouse)
 
     if game_state == "home":
-        state = homepage.update(screen,pygame.mouse,pressed)
+        state = homepage.update(screen,pygame.mouse,mousePos,pressed)
         if state == "Start":
-            pressed = False
             game_state = "game"
         if state == "setts":
-            pressed = False
             game_state = "settings"
         if state == "quit":
             running = False
 
 
     if game_state == "end":
-        pressed = False
         endPage.displayWord(font, chosenWord, screen)
-        state = endPage.update(screen, pygame.mouse,pressed)
+        state = endPage.update(screen, pygame.mouse,mousePos,pressed)
 
         if state == "game":
             codedWord, chosenWord = pickWord(wordList)
-            pressed = False
             game_state = "game"
         if state == "home":
-            pressed = False
             game_state = "home"
             codedWord, chosenWord = pickWord(wordList)
 
     if game_state == "settings":
-        pressed = False
-        if settingsPage.update(screen, pygame.mouse,pressed) == "home":
+        if settingsPage.update(screen, pygame.mouse,mousePos,pressed) == "home":
             game_state = "home"
 
 

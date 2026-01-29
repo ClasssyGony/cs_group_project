@@ -20,21 +20,21 @@ class Home:
         self.quitButton = Button(screen, self.quitButtonW, self.quitButtonH, (0, 0, 0), self.quitButtonPos, "     QUIT", font)
 
 
-    def update(self,screen,mouse,pressed):
-        if self.startButton.update(screen, mouse, pressed)[0]:
+    def update(self,screen,mouse,mousePos,pressed):
+        if self.startButton.update(screen, mouse,mousePos, pressed):
             return "Start"
         
-        if self.settingButton.update(screen, mouse, pressed)[0]:
+        if self.settingButton.update(screen, mouse,mousePos, pressed):
             return 'setts'
         
-        if self.quitButton.update(screen, mouse, pressed)[0]:
+        if self.quitButton.update(screen, mouse,mousePos, pressed):
             return "quit"
         
 
 class Endpage:
     def __init__(self, font, word, screen):
         self.endButtonPos = [490,300]
-        self.endButtonW = 400
+        self.endButtonW = 200
         self.endButtonH = 40
         self.endButton = Button(screen, self.endButtonW, self.endButtonH, (0, 0, 0), self.endButtonPos, "Next word", font)
 
@@ -52,10 +52,10 @@ class Endpage:
         wordRect.center = (490, 200)
         screen.blit(word,wordRect)   
 
-    def update(self, screen, mouse,pressed):
-        if self.endButton.update(screen, mouse, pressed)[0]:
+    def update(self, screen, mouse,mousePos,pressed):
+        if self.endButton.update(screen, mouse,mousePos, pressed):
             return "game"
-        if self.homeButton.update(screen, mouse, pressed)[0]:
+        if self.homeButton.update(screen, mouse,mousePos, pressed):
             return( "home")
         
     def newWord(self, word):
@@ -69,6 +69,6 @@ class Settings:
         self.backButtonW = 100
         self.backButton = Button(screen, self.backButtonW, self.backButtonH, (0, 0, 0), self.backButtonPos, "Back", font)
     
-    def update(self, screen, mouse, pressed):
-        if self.backButton.update(screen, mouse, pressed)[0]:
+    def update(self, screen, mouse,mousePos, pressed):
+        if self.backButton.update(screen, mouse,mousePos, pressed):
             return "home"
