@@ -1,4 +1,5 @@
 import pygame
+from support.managingWord import getMouseClick
 
 class Button:
     def __init__(self,surface, width, height, colour, pos, value, font):
@@ -8,7 +9,6 @@ class Button:
         self.height = height
         self.colour = colour
         self.pos =  pos
-        self.pressed = False
         self.value = value
         self.font = font
 
@@ -19,29 +19,25 @@ class Button:
         # Drawing the self.rectObject onto the surface with the colour and settings of self.rect
         self.button = pygame.draw.rect(surface,colour,self.rect)
 
-    def checkMouseClick(self,mouse):
-        mouseGetPressed = mouse.get_pressed()[0]
-        mousePos = mouse.get_pos()
+    def checkMouseClick(self,mouse,mousePos,pressed):
         
         # This is to check if the mouse button was inactive and is now active in the correct defined regions
-        if self.pressed == False and mouseGetPressed == True and mousePos[0] > self.pos[0] and mousePos[0] < self.pos[0] + self.width and mousePos[1] > self.pos[1] and mousePos[1] < self.pos[1] + self.height:
-            self.pressed = True
+        if pressed != False and mouse.get_just_pressed()[0] == True and mousePos[0] > self.pos[0] and mousePos[0] < self.pos[0] + self.width and mousePos[1] > self.pos[1] and mousePos[1] < self.pos[1] + self.height:
             return True
 
-        # This to check if the mouse has moved to inactivity
-        if mouseGetPressed == False:
-            self.pressed = False
+        return False
 
-    def update(self,surface,mouse):
+    def update(self,surface,mouse,mousePos,pressed):
         self.button = pygame.draw.rect(surface,self.colour,self.rect)
         surface.blit(self.text, (self.pos[0]+5,self.pos[1]+5))
         
-
         # Check if mouse clicked condition has been achived
-        if self.checkMouseClick(mouse) and self.pressed != False:
+        i = self.checkMouseClick(mouse,mousePos,pressed)
+        if i and pressed != False:
             # Present Output
             return True
-        
+        return False
+    
 
 """ KEYPAD CLASS """
 class KEYPAD:
@@ -72,10 +68,11 @@ class KEYPAD:
 
                 self.buttons.append(button)
 
-    def update(self,surface,mouse):
+    def update(self,surface,mouse,mousePos,pressed):
         value = " "
         for button in self.buttons:
-            if button.update(surface,mouse):
+            i = button.update(surface,mouse,mousePos,pressed)
+            if i:
                 if value == " ":
                     value = button.value.lower()
         
