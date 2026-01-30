@@ -1,5 +1,6 @@
 import pygame
 from support.button import Button
+from support.reputation import Reputation
 
 
 class Home:
@@ -44,13 +45,32 @@ class Endpage:
 
         self.homeButton = Button(screen, self.homeButtonW, self.endButtonH, (0, 0, 0), self.homeButtonPos, "Home", font)
     
-    def displayWord(self, font, word, screen):
+    def displayWord(self, font, word, screen, rep, totalRepp): #This changed
         self.chosenWord = word
+        self.reputation = rep                   #This changed
+        
 
         word = font.render(self.chosenWord, True, (0, 0, 0), (255, 255, 255))
         wordRect = word.get_rect()
         wordRect.center = (490, 200)
-        screen.blit(word,wordRect)   
+        screen.blit(word,wordRect)# it says this changed but idk why
+
+        #new from here
+        d = "Reputation gained: " + str(rep)
+        
+        t = "Total reputation:  " + str(totalRepp)
+        reputation = font.render(d, True, (0, 0, 0), (255, 255, 255))
+        reputationRect = reputation.get_rect()
+        reputationRect.center = (200, 200)
+        screen.blit(reputation, reputationRect)
+
+        totalRep = font.render(t, True, (0, 0, 0), (255, 255, 255))
+        totalRepRect = totalRep.get_rect()
+        totalRepRect.center = (300, 300)
+        screen.blit(totalRep, totalRepRect)
+        #to here
+
+        
 
     def update(self, screen, mouse,mousePos,pressed):
         if self.endButton.update(screen, mouse,mousePos, pressed):
@@ -72,3 +92,43 @@ class Settings:
     def update(self, screen, mouse,mousePos, pressed):
         if self.backButton.update(screen, mouse,mousePos, pressed):
             return "home"
+        
+#New from here
+
+class GameOver:
+    def __init__(self, font, word, screen):
+        self.homeButtonPos = [10, 10]
+        self.homeButtonW = 100
+        self.homeButtonH = 30
+
+        self.homeButton = Button(screen, self.homeButtonW, self.endButtonH, (0, 0, 0), self.homeButtonPos, "Home", font)
+    
+
+    def displayWord(self, font, word, screen, rep, totalRepp):
+        self.chosenWord = word
+        self.reputation = rep
+        
+        word = font.render(self.chosenWord, True, (0, 0, 0), (255, 255, 255))
+        wordRect = word.get_rect()
+        wordRect.center = (490, 200)
+        screen.blit(word,wordRect)
+#
+        d = "Reputation gained: " + str(rep)
+        
+        t = "Total reputation:  " + str(totalRepp)
+        reputation = font.render(d, True, (0, 0, 0), (255, 255, 255))
+        reputationRect = reputation.get_rect()
+        reputationRect.center = (200, 200)
+        screen.blit(reputation, reputationRect)
+
+        totalRep = font.render(t, True, (0, 0, 0), (255, 255, 255))
+        totalRepRect = totalRep.get_rect()
+        totalRepRect.center = (300, 300)
+        screen.blit(totalRep, totalRepRect)
+        #to here
+
+        
+
+    def update(self, screen, mouse,mousePos,pressed):
+        if self.homeButton.update(screen, mouse,mousePos, pressed):
+            return( "home")

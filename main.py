@@ -2,6 +2,7 @@ import pygame
 from support.button import KEYPAD
 from support.managingWord import *
 from support.homepage import Home, Endpage, Settings
+from support.reputation import Reputation                  #this is new
 
 pygame.init()
 pygame.font.init()
@@ -14,6 +15,8 @@ font = pygame.font.Font("freesansbold.ttf", 32)
 keypad = KEYPAD(screen,font)
 
 game_state = "home"
+
+reputation = Reputation(0)      #New
 
 codedWord, chosenWord = pickWord(wordList)
 
@@ -44,6 +47,8 @@ while running:
 
         if win:
             game_state = "end"
+            # rep =                 This is where you put in how much reputation the new word is worth.
+            #reputation.addRep(rep)                                          #this is different
             endPage.newWord(chosenWord)
 
         #Update button
@@ -60,7 +65,7 @@ while running:
 
 
     if game_state == "end":
-        endPage.displayWord(font, chosenWord, screen)
+        endPage.displayWord(font, chosenWord, screen, rep, reputation.reputation)    #this is different
         state = endPage.update(screen, pygame.mouse,mousePos,pressed)
 
         if state == "game":
