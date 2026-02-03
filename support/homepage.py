@@ -109,7 +109,7 @@ class GameOver:
         self.homeButtonW = 100
         self.homeButtonH = 30
 
-        self.homeButton = Button(screen, self.homeButtonW, self.endButtonH, (0, 0, 0), self.homeButtonPos, "Home", font)
+        self.homeButton = Button(screen, self.homeButtonW, self.homeButtonH, (0, 0, 0), self.homeButtonPos, "Home", font)
     
 
     def displayWord(self, font, word, screen, rep, totalRepp):

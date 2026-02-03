@@ -9,11 +9,10 @@ with open("wordlist.txt", 'r') as file:
     for word in words:
         wordList.append(word.lower())
 
-#used in testing
-reputation = 5
+#used in testing 
 
 #picking the word
-def pickWord(wordList):
+def pickWord(wordList, reputation):
     global codedWord
     chosenWord = random.choice(wordList)
     #how reputation affects the game

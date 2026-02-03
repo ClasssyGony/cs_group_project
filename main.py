@@ -1,7 +1,7 @@
 import pygame
 from support.button import KEYPAD
 from support.managingWord import *
-from support.homepage import Home, Endpage, Settings
+from support.homepage import Home, Endpage, Settings, GameOver
 from support.reputation import Reputation
 from support.hangmanstates import HangmanStates
 
@@ -17,13 +17,14 @@ keypad = KEYPAD(screen,font)
 
 game_state = "home"
 
-reputation = Reputation(0)      #New
+reputation = Reputation(0)
 
-codedWord, chosenWord = pickWord(wordList)
+codedWord, chosenWord = pickWord(wordList, reputation.reputation)
 
 homepage = Home(font, screen)
 endPage = Endpage(font, chosenWord, screen)
 settingsPage = Settings(font, screen)
+gameOverPage = GameOver(font, "none", screen)
 
 pressed = False
 
@@ -59,18 +60,19 @@ while running:
             lives -= 1
 
         if lives <= 0:
-            codedWord, chosenWord = pickWord(wordList)
+            codedWord, chosenWord = pickWord(wordList, reputation.reputation)
             keypad.reset()
             lives = 6
-            game_state = "home"
+            game_state = "game Over"
 
         hangman.update(screen, lives)
 
         if win:
             lives = 6
             game_state = "end"
-            # rep =                 This is where you put in how much reputation the new word is worth.
-            #reputation.addRep(rep)                                          #this is different
+            #Need to pick how much reputatin you get for the word
+            rep = 6
+            reputation.addRep(rep)
             endPage.newWord(chosenWord)
 
     if game_state == "home":
@@ -81,6 +83,7 @@ while running:
             game_state = "settings"
         if state == "quit":
             running = False
+        
 
 
     if game_state == "end":
@@ -90,16 +93,27 @@ while running:
         keypad.reset()
 
         if state == "game":
-            codedWord, chosenWord = pickWord(wordList)
+            codedWord, chosenWord = pickWord(wordList, reputation.reputation)
             
             game_state = "game"
         if state == "home":
             game_state = "home"
-            codedWord, chosenWord = pickWord(wordList)
+            codedWord, chosenWord = pickWord(wordList, reputation.reputation)
 
     if game_state == "settings":
         if settingsPage.update(screen, pygame.mouse,mousePos,pressed) == "home":
             game_state = "home"
+    
+    if game_state == "game Over":
+        gameOverPage.displayWord(font, chosenWord, screen, rep, reputation.reputation)
+        state = gameOverPage.update(screen, pygame.mouse, mousePos, pressed)
+        keypad.reset()
+        if state == "home":
+            game_state = "home"
+            codedWord, chosenWord = pickWord(wordList, reputation.reputation)
+            reputation.reputation = 0
+
+
 
 
 
