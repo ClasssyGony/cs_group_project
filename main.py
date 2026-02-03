@@ -1,92 +1,105 @@
-import random
 import pygame
-import time
+from support.button import KEYPAD
+from support.managingWord import *
+from support.homepage import Home, Endpage, Settings
+from support.hangmanstates import HangmanStates
 
-#word list
-wordList = []
-with open("wordlist.txt", 'r') as file:
-    words = file.read().splitlines()
-    for word in words:
-        wordList.append(word.lower())
+pygame.init()
+pygame.font.init()
+width = 1280
+height = 720
+screen = pygame.display.set_mode((width, height))
+clock = pygame.time.Clock()
+running = True
+font = pygame.font.Font("freesansbold.ttf", 32)
+keypad = KEYPAD(screen,font)
 
-#used in testing
-reputation = 5
+game_state = "home"
 
-#picking the word
-def pickWord(wordList):
-    global codedWord
-    chosenWord = random.choice(wordList)
-    #how reputation affects the game
-    if reputation <= 25:
-        while len(chosenWord) >= 7:
-            chosenWord = random.choice(wordList)
-    elif reputation <= 75 and reputation > 25:
-        while len(chosenWord) > 10 or len(chosenWord) < 6:
-            chosenWord = random.choice(wordList)
-    elif reputation <= 150 and reputation > 75:
-        while len(chosenWord) > 12 or len(chosenWord) < 8:
-            chosenWord = random.choice(wordList)
-    elif reputation <= 250 and reputation > 150:
-        while len(chosenWord) >= 15 or len(chosenWord) < 10:
-            chosenWord = random.choice(wordList)
-    elif reputation > 250:
-        while len(chosenWord) <= 12:
-            chosenWord = random.choice(wordList)
-    codedWord = ""
-    for i in range(len(chosenWord)):
-        codedWord = codedWord + "_"
-    return codedWord, chosenWord
+codedWord, chosenWord = pickWord(wordList)
 
-#checking user input
-def checkInput(userInput, chosenWord):
-    global codedWord
-    correct = False
-    wrong = False
-    for i in range(len(chosenWord)):
-        if userInput == chosenWord[i]:
-            temp = codedWord[:i] + userInput + codedWord[i+1:]
-            codedWord = temp
-            correct = True
+homepage = Home(font, screen)
+endPage = Endpage(font, chosenWord, screen)
+settingsPage = Settings(font, screen)
 
-    if userInput != " " and correct == False:
-        wrong = True
+pressed = False
+
+hangman = HangmanStates()
+lives = 6
+
+while running:
     
-    #Checking weather the user has won the game
-    count = 0
-    finished = False
-    for i in range(len(chosenWord)):
-        if chosenWord[i] == codedWord[i]:
-            count = count + 1
-    
-    if count == len(chosenWord):
-        finished = True
-    return codedWord, correct, finished, wrong
+    # showing the coded word
+    screen.fill("WHITE")
 
     
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+   
+    mousePos, pressed = getMouseClick(pressed)
 
-def displayWord(screen,font,chosenWord):
-    #setting up code word for display
-    displayedCodedWord = font.render(' '.join(codedWord), True, (0, 0, 0), (255, 255, 255))
-    codedWordRect = displayedCodedWord.get_rect()
-    codedWordRect.center = (750, 125)
+    if game_state == "game":
+        
+        displayWord(screen,font,chosenWord)
+        userInput = keypad.update(screen,pygame.mouse,mousePos,pressed)
+        correct = False
+        codeWord, correct, win, wrong = checkInput(userInput, chosenWord)
 
-    #showing the real word to make it easier
-    displayRealWord = font.render(chosenWord, True, (0, 0, 0), (255, 255, 255))
-    displayReadWordRect = displayRealWord.get_rect()
-    displayReadWordRect.center = (30, 30)
+        pygame.draw.rect(screen, "black", (500, 25, 25, 400))
 
-    screen.fill((255, 255, 255))
-    screen.blit(displayedCodedWord, codedWordRect)
-    screen.blit(displayRealWord)
+        pygame.draw.rect(screen, "black", (160, 25, 365, 25))
 
-def getMouseClick(pressed):
-    if pygame.mouse.get_pressed()[0] and pressed == False:
-        pressed = True
-        mousePos = pygame.mouse.get_pos()
-        return mousePos, pressed
+        pygame.draw.rect(screen, "black", (160, 25, 20, 100))
 
-    if pygame.mouse.get_pressed()[0] == False:
-        pressed = False
-        return (0,0),pressed
+        if wrong == True:
+            lives -= 1
+
+        if lives <= 0:
+            codedWord, chosenWord = pickWord(wordList)
+            keypad.reset()
+            lives = 6
+            game_state = "home"
+
+        hangman.update(screen, lives)
+
+        if win:
+            lives = 6
+            game_state = "end"
+            endPage.newWord(chosenWord)
+
+    if game_state == "home":
+        state = homepage.update(screen,pygame.mouse,mousePos,pressed)
+        if state == "Start":
+            game_state = "game"
+        if state == "setts":
+            game_state = "settings"
+        if state == "quit":
+            running = False
+
+
+    if game_state == "end":
+        endPage.displayWord(font, chosenWord, screen)
+        state = endPage.update(screen, pygame.mouse,mousePos,pressed)
+        keypad.reset()
+
+        if state == "game":
+            codedWord, chosenWord = pickWord(wordList)
+            
+            game_state = "game"
+        if state == "home":
+            game_state = "home"
+            codedWord, chosenWord = pickWord(wordList)
+
+    if game_state == "settings":
+        if settingsPage.update(screen, pygame.mouse,mousePos,pressed) == "home":
+            game_state = "home"
+
+
+
+    clock.tick(120)
     
-    return (0,0), pressed
+    #Refrest the screen every tick
+    pygame.display.update()
+
+pygame.quit()
