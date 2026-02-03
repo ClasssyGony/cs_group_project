@@ -8,3 +8,6 @@ class Reputation:
     
     def subRep(self, moreRep):
         self.reputation = self.reputation - moreRep
+    
+    def rep(self):
+        return self.reputation

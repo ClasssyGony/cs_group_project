@@ -1,5 +1,4 @@
 import socket
-from _thread import *
 import pickle
 
 class Network:
@@ -18,14 +17,13 @@ class Network:
         except:
             pass
 
-
     def get(self):
         return self.connect()
     
     def send(self, data):
         try:
             self.client.send(str.encode(data))
-            return pickle.loads(self.client)
-        except:
-            pass
+            return pickle.loads(self.client.recv(2048))
+        except socket.error as e:
+            print(e)
 

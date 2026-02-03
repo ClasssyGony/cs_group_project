@@ -65,6 +65,7 @@ while running:
 
 
     if game_state == "end":
+        rep = 0 #this is new
         endPage.displayWord(font, chosenWord, screen, rep, reputation.reputation)    #this is different
         state = endPage.update(screen, pygame.mouse,mousePos,pressed)
 

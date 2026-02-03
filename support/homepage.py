@@ -88,11 +88,19 @@ class Settings:
         self.backButtonH = 49
         self.backButtonW = 100
         self.backButton = Button(screen, self.backButtonW, self.backButtonH, (0, 0, 0), self.backButtonPos, "Back", font)
+
+        #this changed
+        no = font.render("You are not aloud to change settings", True, (0, 0, 0), (255, 255, 255))
+        noRect = no.get_rect()
+        noRect.center = (200, 200)
+        screen.blit(no, noRect)
+    #to here
     
     def update(self, screen, mouse,mousePos, pressed):
         if self.backButton.update(screen, mouse,mousePos, pressed):
             return "home"
         
+
 #New from here
 
 class GameOver:
@@ -112,23 +120,23 @@ class GameOver:
         wordRect = word.get_rect()
         wordRect.center = (490, 200)
         screen.blit(word,wordRect)
-#
-        d = "Reputation gained: " + str(rep)
-        
-        t = "Total reputation:  " + str(totalRepp)
-        reputation = font.render(d, True, (0, 0, 0), (255, 255, 255))
-        reputationRect = reputation.get_rect()
-        reputationRect.center = (200, 200)
-        screen.blit(reputation, reputationRect)
+
+        t = "Your reputation:  " + str(totalRepp)
 
         totalRep = font.render(t, True, (0, 0, 0), (255, 255, 255))
         totalRepRect = totalRep.get_rect()
         totalRepRect.center = (300, 300)
         screen.blit(totalRep, totalRepRect)
-        #to here
+
+        end = font.render("Game Over", True, (0, 0, 0), (255, 255, 255))
+        endrect = word.get_rect()
+        endrect.center = (490, 200)
+        screen.blit(end,endrect)
 
         
 
     def update(self, screen, mouse,mousePos,pressed):
         if self.homeButton.update(screen, mouse,mousePos, pressed):
             return( "home")
+        
+#to here
