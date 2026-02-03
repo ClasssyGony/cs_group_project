@@ -9,15 +9,30 @@ with open("wordlist.txt", 'r') as file:
     for word in words:
         wordList.append(word.lower())
 
-    
-
+#used in testing
+reputation = 5
 
 #picking the word
 def pickWord(wordList):
     global codedWord
     chosenWord = random.choice(wordList)
+    #how reputation affects the game
+    if reputation <= 25:
+        while len(chosenWord) >= 7:
+            chosenWord = random.choice(wordList)
+    elif reputation <= 75 and reputation > 25:
+        while len(chosenWord) > 10 or len(chosenWord) < 6:
+            chosenWord = random.choice(wordList)
+    elif reputation <= 150 and reputation > 75:
+        while len(chosenWord) > 12 or len(chosenWord) < 8:
+            chosenWord = random.choice(wordList)
+    elif reputation <= 250 and reputation > 150:
+        while len(chosenWord) >= 15 or len(chosenWord) < 10:
+            chosenWord = random.choice(wordList)
+    elif reputation > 250:
+        while len(chosenWord) <= 12:
+            chosenWord = random.choice(wordList)
     codedWord = ""
-   # print(chosenWord)
     for i in range(len(chosenWord)):
         codedWord = codedWord + "_"
     return codedWord, chosenWord
@@ -26,11 +41,15 @@ def pickWord(wordList):
 def checkInput(userInput, chosenWord):
     global codedWord
     correct = False
+    wrong = False
     for i in range(len(chosenWord)):
         if userInput == chosenWord[i]:
             temp = codedWord[:i] + userInput + codedWord[i+1:]
             codedWord = temp
             correct = True
+
+    if userInput != " " and correct == False:
+        wrong = True
     
     #Checking weather the user has won the game
     count = 0
@@ -41,7 +60,7 @@ def checkInput(userInput, chosenWord):
     
     if count == len(chosenWord):
         finished = True
-    return codedWord, correct, finished
+    return codedWord, correct, finished, wrong
 
     
 

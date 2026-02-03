@@ -2,7 +2,8 @@ import pygame
 from support.button import KEYPAD
 from support.managingWord import *
 from support.homepage import Home, Endpage, Settings
-from support.reputation import Reputation                  #this is new
+from support.reputation import Reputation
+from support.hangmanstates import HangmanStates
 
 pygame.init()
 pygame.font.init()
@@ -26,6 +27,9 @@ settingsPage = Settings(font, screen)
 
 pressed = False
 
+hangman = HangmanStates()
+lives = 6
+
 while running:
     
     # showing the coded word
@@ -43,16 +47,31 @@ while running:
         displayWord(screen,font,chosenWord)
         userInput = keypad.update(screen,pygame.mouse,mousePos,pressed)
         correct = False
-        codeWord, correct, win = checkInput(userInput, chosenWord)
+        codeWord, correct, win, wrong = checkInput(userInput, chosenWord)
+
+        pygame.draw.rect(screen, "black", (500, 25, 25, 400))
+
+        pygame.draw.rect(screen, "black", (160, 25, 365, 25))
+
+        pygame.draw.rect(screen, "black", (160, 25, 20, 100))
+
+        if wrong == True:
+            lives -= 1
+
+        if lives <= 0:
+            codedWord, chosenWord = pickWord(wordList)
+            keypad.reset()
+            lives = 6
+            game_state = "home"
+
+        hangman.update(screen, lives)
 
         if win:
+            lives = 6
             game_state = "end"
             # rep =                 This is where you put in how much reputation the new word is worth.
             #reputation.addRep(rep)                                          #this is different
             endPage.newWord(chosenWord)
-
-        #Update button
-        #button1.update(screen,pygame.mouse)
 
     if game_state == "home":
         state = homepage.update(screen,pygame.mouse,mousePos,pressed)
@@ -68,9 +87,11 @@ while running:
         rep = 0 #this is new
         endPage.displayWord(font, chosenWord, screen, rep, reputation.reputation)    #this is different
         state = endPage.update(screen, pygame.mouse,mousePos,pressed)
+        keypad.reset()
 
         if state == "game":
             codedWord, chosenWord = pickWord(wordList)
+            
             game_state = "game"
         if state == "home":
             game_state = "home"

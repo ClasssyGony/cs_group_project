@@ -47,8 +47,9 @@ class KEYPAD:
         self.buttonsize = [50,65]
         self.keypad_rect = [545,205] # [width, height]
         self.font = font
-
+        self.colour = "black"
         self.buttons = []
+        self.unavalible = []
 
         for index, rows in enumerate(self.layout):
             startingPos = [self.pos[0],self.pos[1]+index*(self.buttonsize[1]+5)]
@@ -61,21 +62,33 @@ class KEYPAD:
                 button = Button(surface,
                                 self.buttonsize[0],
                                 self.buttonsize[1],
-                                "Black",
+                                self.colour,
                                 (xpos,startingPos[1]),
                                 letter,
                                 font)
 
                 self.buttons.append(button)
 
+    def reset(self):
+        for button in self.buttons:
+            button.colour = "black"
+        self.unavalible = []
+
     def update(self,surface,mouse,mousePos,pressed):
         value = " "
         for button in self.buttons:
+            valid = True
             i = button.update(surface,mouse,mousePos,pressed)
-            if i:
+            for letter in self.unavalible:
+                
+                if letter == button.value:
+                    button.colour = "grey"
+                    valid = False
+        
+            if i and valid:
                 if value == " ":
                     value = button.value.lower()
-        
+                    self.unavalible.append(value.upper())
 
         return value
 
