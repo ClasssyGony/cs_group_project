@@ -16,7 +16,7 @@ class Home:
         self.settingButtonW = 450
         self.settingButtonH = 74
         self.settingButton = Button(screen, self.settingButtonW, self.settingButtonH, (0, 0, 0), self.settingButtonPos, "SETTINGS", font)
-        self.settingImage = pygame.image.load("support/assets/mainmenu/4.png")
+        self.settingImage = pygame.image.load("support/assets/mainmenu/4.png").convert_alpha()
         self.settingRect = self.startImage.get_rect()
         self.settingRect.center = self.settingButton.rect.center
 
@@ -24,18 +24,14 @@ class Home:
         self.quitButtonW = 450
         self.quitButtonH = 74
         self.quitButton = Button(screen, self.quitButtonW, self.quitButtonH, (0, 0, 0), self.quitButtonPos, "QUIT", font)
-        self.quitImage = pygame.image.load("support/assets/mainmenu/5.png")
+        self.quitImage = pygame.image.load("support/assets/mainmenu/5.png").convert_alpha()
         self.quitRect = self.quitImage.get_rect()
         self.quitRect.center = self.quitButton.rect.center
 
-        self.homepageImage = pygame.image.load("support/assets/mainmenu/homepage.png")
+        self.homepageImage = pygame.image.load("support/assets/mainmenu/homepage.png").convert_alpha()
         self.music = pygame.mixer.music
         self.music.load("support/assets/menuMusic.mp3")
         self.music.play(-1)
-
-
-
-
 
     def update(self,screen,mouse,mousePos,pressed):
         
