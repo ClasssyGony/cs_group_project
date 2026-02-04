@@ -140,7 +140,6 @@ class GameOver:
         totalRepRect.center = (300, 300)
         screen.blit(totalRep, totalRepRect)
 
-        print(self.chosenWord)
 
         end = font.render("Game Over", True, (0, 0, 0), (255, 255, 255))
         endrect = end.get_rect()
