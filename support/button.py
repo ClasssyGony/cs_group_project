@@ -14,7 +14,9 @@ class Button:
 
         # New instance of Rect with (left, top, width, height)
         self.rect = pygame.Rect(self.pos[0],self.pos[1],self.width,self.height)
-        self.text = font.render(f"{value}", True, (255, 255, 255))
+        self.text = font.render(f"{value}", True, (0, 0, 0))
+        self.textRect = self.text.get_rect()
+        self.textRect.center = self.rect.center
 
         # Drawing the self.rectObject onto the surface with the colour and settings of self.rect
         self.button = pygame.draw.rect(surface,colour,self.rect)
@@ -22,18 +24,17 @@ class Button:
     def checkMouseClick(self,mouse,mousePos,pressed):
         
         # This is to check if the mouse button was inactive and is now active in the correct defined regions
-        if pressed != False and mouse.get_just_pressed()[0] == True and mousePos[0] > self.pos[0] and mousePos[0] < self.pos[0] + self.width and mousePos[1] > self.pos[1] and mousePos[1] < self.pos[1] + self.height:
+        if pressed != False and mouse.get_just_pressed()[0] and mousePos[0] > self.pos[0] and mousePos[0] < self.pos[0] + self.width and mousePos[1] > self.pos[1] and mousePos[1] < self.pos[1] + self.height:
             return True
 
         return False
 
     def update(self,surface,mouse,mousePos,pressed):
         self.button = pygame.draw.rect(surface,self.colour,self.rect)
-        surface.blit(self.text, (self.pos[0]+5,self.pos[1]+5))
+        surface.blit(self.text, (self.textRect))
         
         # Check if mouse clicked condition has been achived
-        i = self.checkMouseClick(mouse,mousePos,pressed)
-        if i and pressed != False:
+        if self.checkMouseClick(mouse,mousePos,pressed) and pressed != False:
             # Present Output
             return True
         return False
@@ -47,7 +48,7 @@ class KEYPAD:
         self.buttonsize = [50,65]
         self.keypad_rect = [545,205] # [width, height]
         self.font = font
-        self.colour = "black"
+        self.colour = "white"
         self.buttons = []
         self.unavalible = []
 
@@ -71,7 +72,7 @@ class KEYPAD:
 
     def reset(self):
         for button in self.buttons:
-            button.colour = "black"
+            button.colour = "white"
         self.unavalible = []
 
     def update(self,surface,mouse,mousePos,pressed):

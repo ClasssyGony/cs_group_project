@@ -1,6 +1,5 @@
 import random
 import pygame
-import time
 
 #word list
 wordList = []
@@ -9,7 +8,6 @@ with open("wordlist.txt", 'r') as file:
     for word in words:
         wordList.append(word.lower())
 
-#used in testing 
 
 #picking the word
 def pickWord(wordList, reputation):
@@ -65,7 +63,7 @@ def checkInput(userInput, chosenWord):
 
 def displayWord(screen,font,chosenWord):
     #setting up code word for display
-    displayedCodedWord = font.render(' '.join(codedWord), True, (0, 0, 0), (255, 255, 255))
+    displayedCodedWord = font.render(' '.join(codedWord), True, (255, 255, 255))
     codedWordRect = displayedCodedWord.get_rect()
     codedWordRect.center = (750, 125)
 
@@ -74,7 +72,7 @@ def displayWord(screen,font,chosenWord):
     #displayReadWordRect = displayRealWord.get_rect()
     #displayReadWordRect.center = (30, 30)
 
-    screen.fill((255, 255, 255))
+    #screen.fill((255, 255, 255))
     screen.blit(displayedCodedWord, codedWordRect)
    # screen.blit(displayRealWord)
 
