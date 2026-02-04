@@ -60,6 +60,7 @@ while running:
             lives -= 1
 
         if lives <= 0:
+            w = chosenWord
             codedWord, chosenWord = pickWord(wordList, reputation.reputation)
             keypad.reset()
             lives = 6
@@ -105,7 +106,7 @@ while running:
             game_state = "home"
     
     if game_state == "game Over":
-        gameOverPage.displayWord(font, chosenWord, screen, rep, reputation.reputation)
+        gameOverPage.displayWord(font, w, screen, reputation.reputation)
         state = gameOverPage.update(screen, pygame.mouse, mousePos, pressed)
         keypad.reset()
         if state == "home":

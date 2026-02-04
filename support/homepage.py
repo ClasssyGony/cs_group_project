@@ -112,14 +112,8 @@ class GameOver:
         self.homeButton = Button(screen, self.homeButtonW, self.homeButtonH, (0, 0, 0), self.homeButtonPos, "Home", font)
     
 
-    def displayWord(self, font, word, screen, rep, totalRepp):
+    def displayWord(self, font, word, screen, totalRepp):
         self.chosenWord = word
-        self.reputation = rep
-        
-        word = font.render(self.chosenWord, True, (0, 0, 0), (255, 255, 255))
-        wordRect = word.get_rect()
-        wordRect.center = (490, 200)
-        screen.blit(word,wordRect)
 
         t = "Your reputation:  " + str(totalRepp)
 
@@ -128,10 +122,18 @@ class GameOver:
         totalRepRect.center = (300, 300)
         screen.blit(totalRep, totalRepRect)
 
+        print(self.chosenWord)
+
         end = font.render("Game Over", True, (0, 0, 0), (255, 255, 255))
-        endrect = word.get_rect()
+        endrect = end.get_rect()
         endrect.center = (490, 200)
         screen.blit(end,endrect)
+
+
+        wor = font.render(self.chosenWord, True, (0, 0, 0), (255, 255, 255))
+        worrect = wor.get_rect()
+        worrect.center = (500, 300)
+        screen.blit(wor,worrect)
 
         
 

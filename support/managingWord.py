@@ -70,13 +70,13 @@ def displayWord(screen,font,chosenWord):
     codedWordRect.center = (750, 125)
 
     #showing the real word to make it easier
-    displayRealWord = font.render(chosenWord, True, (0, 0, 0), (255, 255, 255))
-    displayReadWordRect = displayRealWord.get_rect()
-    displayReadWordRect.center = (30, 30)
+    #displayRealWord = font.render(chosenWord, True, (0, 0, 0), (255, 255, 255))
+    #displayReadWordRect = displayRealWord.get_rect()
+    #displayReadWordRect.center = (30, 30)
 
     screen.fill((255, 255, 255))
     screen.blit(displayedCodedWord, codedWordRect)
-    screen.blit(displayRealWord)
+   # screen.blit(displayRealWord)
 
 def getMouseClick(pressed):
     if pygame.mouse.get_pressed()[0] and pressed == False:
