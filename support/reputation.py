@@ -11,3 +11,7 @@ class Reputation:
     
     def rep(self):
         return self.reputation
+    
+def repPick(word):
+    rep = random.randint(len(word)-3, len(word)+6)
+    return rep

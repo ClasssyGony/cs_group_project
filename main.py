@@ -2,7 +2,7 @@ import pygame, random, time
 from support.button import KEYPAD
 from support.managingWord import *
 from support.homepage import Home, Endpage, Settings, GameOver
-from support.reputation import Reputation
+from support.reputation import Reputation, repPick
 from support.hangmanstates import HangmanStates
 
 pygame.init()
@@ -82,8 +82,7 @@ while running:
         if win:
             lives = 15
             game_state = "end"
-            #Need to pick how much reputatin you get for the word
-            rep = 6
+            rep = repPick(chosenWord)
             reputation.addRep(rep)
             endPage.newWord(chosenWord)
 
@@ -98,7 +97,7 @@ while running:
         
 
     if game_state == "end":
-        rep = 0 #this is new
+        
         endPage.displayWord(font, chosenWord, screen, rep, reputation.reputation)    #this is different
         state = endPage.update(screen, pygame.mouse,mousePos,pressed)
         keypad.reset()
