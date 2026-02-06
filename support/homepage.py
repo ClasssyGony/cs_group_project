@@ -52,35 +52,39 @@ class Home:
 
 class Endpage:
     def __init__(self, font, word, screen):
+        # Working
         self.endButtonPos = [490,300]
         self.endButtonW = 200
         self.endButtonH = 40
-        self.endButton = Button(screen, self.endButtonW, self.endButtonH, (0, 0, 0), self.endButtonPos, "Next word", font)
-
+        self.endButton = Button(screen, self.endButtonW, self.endButtonH, (255, 255, 255), self.endButtonPos, "Next word", font)
+        
+        #working
         self.homeButtonPos = [10, 10]
         self.homeButtonW = 100
         self.homeButtonH = 30
 
-        self.homeButton = Button(screen, self.homeButtonW, self.endButtonH, (0, 0, 0), self.homeButtonPos, "Home", font)
+        self.homeButton = Button(screen, self.homeButtonW, self.endButtonH, (255, 255, 255), self.homeButtonPos, "Home", font)
     
     def displayWord(self, font, word, screen, rep, totalRepp):
         self.chosenWord = word
         
-
-        word = font.render(self.chosenWord, True, (0, 0, 0), (255, 255, 255))
+        #now working
+        word = font.render(self.chosenWord, True, (255, 255, 255), (0, 0, 0))
         wordRect = word.get_rect()
-        wordRect.center = (490, 200)
+        wordRect.center = (500, 200)
         screen.blit(word,wordRect)
 
         d = "Reputation gained: " + str(rep)
         
         t = "Total reputation:  " + str(totalRepp)
-        reputation = font.render(d, True, (0, 0, 0), (255, 255, 255))
+        # not working
+        reputation = font.render(d, True, (255, 255, 255), (0, 0, 0))
         reputationRect = reputation.get_rect()
         reputationRect.center = (200, 200)
         screen.blit(reputation, reputationRect)
 
-        totalRep = font.render(t, True, (0, 0, 0), (255, 255, 255))
+        #not working
+        totalRep = font.render(t, True, (255, 255, 255), (0, 0, 0))
         totalRepRect = totalRep.get_rect()
         totalRepRect.center = (300, 300)
         screen.blit(totalRep, totalRepRect)
@@ -102,16 +106,25 @@ class Settings:
         self.backButtonPos = [10, 10]
         self.backButtonH = 49
         self.backButtonW = 100
-        self.backButton = Button(screen, self.backButtonW, self.backButtonH, (0, 0, 0), self.backButtonPos, "Back", font)
+        self.backButton = Button(screen, self.backButtonW, self.backButtonH, (255, 255, 255), self.backButtonPos, "Back", font)
 
-        no = font.render("You are not aloud to change settings", True, (0, 0, 0), (255, 255, 255))
+        te = "You are not aloud to change settings"
+        no = font.render(te, True, (255, 255, 255), (255, 255, 255))
         noRect = no.get_rect()
         noRect.center = (200, 200)
         screen.blit(no, noRect)
 
+
+        l = pygame.image.load("support/assets/levels/1.png").convert_alpha()
+        screen.blit(l,(0,0))
+
     
     def update(self, screen, mouse,mousePos, pressed):
+        l = pygame.image.load("support/assets/levels/1.png").convert_alpha()
+        screen.blit(l,(0,0))
         if self.backButton.update(screen, mouse,mousePos, pressed):
+            l = pygame.image.load("support/assets/levels/1.png").convert_alpha()
+            screen.blit(l,(0,0))
             return "home"
         
 
@@ -134,8 +147,8 @@ class GameOver:
         totalRepRect.center = (300, 300)
         screen.blit(totalRep, totalRepRect)
 
-        #level1 = pygame.image.load("support/assets/levels/1.png").convert_alpha()
-        #screen.blit(level1,(0,0))
+        level1 = pygame.image.load("support/assets/levels/1.png").convert_alpha()
+        screen.blit(level1,(0,0))
 
         end = font.render("Game Over", True, (255, 255, 255))
         endrect = end.get_rect()

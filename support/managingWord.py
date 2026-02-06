@@ -1,7 +1,7 @@
 import random
 import pygame
 
-#word list
+
 wordList = []
 with open("wordlist.txt", 'r') as file:
     words = file.read().splitlines()
@@ -48,7 +48,7 @@ def checkInput(userInput, chosenWord):
     if userInput != " " and correct == False:
         wrong = True
     
-    #Checking weather the user has won the game
+    
     count = 0
     finished = False
     for i in range(len(chosenWord)):

@@ -55,7 +55,6 @@ while running:
 
         if wrong == True:
             lives -= 1 
-            #if random.randint(1) == 2:
             scream1.play()
             show_jumpscare = True
             jumpscare_start_time = pygame.time.get_ticks()
@@ -67,6 +66,7 @@ while running:
             if pygame.time.get_ticks() - jumpscare_start_time > 60:
                 show_jumpscare = False
                 
+        print(chosenWord)
 
         
         if lives <= 0:
@@ -78,7 +78,7 @@ while running:
 
 
         hangman.update(screen, lives)
-
+    
         if win:
             lives = 15
             game_state = "end"
@@ -98,7 +98,7 @@ while running:
 
     if game_state == "end":
         
-        endPage.displayWord(font, chosenWord, screen, rep, reputation.reputation)    #this is different
+        endPage.displayWord(font, chosenWord, screen, rep, reputation.reputation)    #here
         state = endPage.update(screen, pygame.mouse,mousePos,pressed)
         keypad.reset()
 
