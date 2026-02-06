@@ -53,7 +53,7 @@ class Home:
 class Endpage:
     def __init__(self, font, word, screen):
         # Working
-        self.endButtonPos = [490,300]
+        self.endButtonPos = [100,500]
         self.endButtonW = 200
         self.endButtonH = 40
         self.endButton = Button(screen, self.endButtonW, self.endButtonH, (255, 255, 255), self.endButtonPos, "Next word", font)
@@ -67,26 +67,27 @@ class Endpage:
     
     def displayWord(self, font, word, screen, rep, totalRepp):
         self.chosenWord = word
+        l = pygame.image.load("support/assets/levels/1.png").convert_alpha()
+        screen.blit(l,(0,0))
         
-        #now working
-        word = font.render(self.chosenWord, True, (255, 255, 255), (0, 0, 0))
+        word = font.render(self.chosenWord, True, (255, 255, 255))
         wordRect = word.get_rect()
-        wordRect.center = (500, 200)
+        wordRect.center = (200, 200)
         screen.blit(word,wordRect)
 
         d = "Reputation gained: " + str(rep)
         
         t = "Total reputation:  " + str(totalRepp)
-        # not working
-        reputation = font.render(d, True, (255, 255, 255), (0, 0, 0))
+        
+        reputation = font.render(d, True, (255, 255, 255))
         reputationRect = reputation.get_rect()
-        reputationRect.center = (200, 200)
+        reputationRect.center = (200, 300)
         screen.blit(reputation, reputationRect)
 
-        #not working
-        totalRep = font.render(t, True, (255, 255, 255), (0, 0, 0))
+        
+        totalRep = font.render(t, True, (255, 255, 255))
         totalRepRect = totalRep.get_rect()
-        totalRepRect.center = (300, 300)
+        totalRepRect.center = (200, 400)
         screen.blit(totalRep, totalRepRect)
 
         
@@ -97,34 +98,32 @@ class Endpage:
         if self.homeButton.update(screen, mouse,mousePos, pressed):
             return( "home")
         
+        
     def newWord(self, word):
         self.chosenWord = word
 
 
 class Settings:
     def __init__(self, font, screen):
+        l = pygame.image.load("support/assets/levels/1.png").convert_alpha()
+        screen.blit(l,(0,0))
         self.backButtonPos = [10, 10]
         self.backButtonH = 49
         self.backButtonW = 100
         self.backButton = Button(screen, self.backButtonW, self.backButtonH, (255, 255, 255), self.backButtonPos, "Back", font)
 
         te = "You are not aloud to change settings"
-        no = font.render(te, True, (255, 255, 255), (255, 255, 255))
+        no = font.render(te, True, (0, 255, 255), (255, 0, 0))
         noRect = no.get_rect()
         noRect.center = (200, 200)
+
         screen.blit(no, noRect)
-
-
-        l = pygame.image.load("support/assets/levels/1.png").convert_alpha()
-        screen.blit(l,(0,0))
-
+        
     
     def update(self, screen, mouse,mousePos, pressed):
-        l = pygame.image.load("support/assets/levels/1.png").convert_alpha()
-        screen.blit(l,(0,0))
+        # l = pygame.image.load("support/assets/levels/1.png").convert_alpha()
+        # screen.blit(l,(0,0))
         if self.backButton.update(screen, mouse,mousePos, pressed):
-            l = pygame.image.load("support/assets/levels/1.png").convert_alpha()
-            screen.blit(l,(0,0))
             return "home"
         
 
@@ -138,31 +137,34 @@ class GameOver:
     
 
     def displayWord(self, font, word, screen, totalRepp):
-        self.chosenWord = word
-
-        t = "Your reputation:  " + str(totalRepp)
-
-        totalRep = font.render(t, True, (255, 255, 255))
-        totalRepRect = totalRep.get_rect()
-        totalRepRect.center = (300, 300)
-        screen.blit(totalRep, totalRepRect)
-
         level1 = pygame.image.load("support/assets/levels/1.png").convert_alpha()
         screen.blit(level1,(0,0))
+        
+        self.chosenWord = word
+
 
         end = font.render("Game Over", True, (255, 255, 255))
         endrect = end.get_rect()
-        endrect.center = (490, 200)
+        endrect.center = (150, 200)
         screen.blit(end,endrect)
 
 
         wor = font.render(self.chosenWord, True, (255, 255, 255))
         worrect = wor.get_rect()
-        worrect.center = (500, 300)
+        worrect.center = (150, 300)
         screen.blit(wor,worrect)
+
+        t = "Total reputation:  " + str(totalRepp)
+        
+        #reputation not showing on screen
 
         
 
-    def update(self, screen, mouse,mousePos,pressed):
+    def update(self, screen, mouse,mousePos,pressed, font):
+        t = "hi there"
+        totalRep = font.render(t, True, (0, 0, 0))
+        totalRepRect = totalRep.get_rect()
+        totalRepRect.center = (500, 500)
+        screen.blit(totalRep, totalRepRect)
         if self.homeButton.update(screen, mouse,mousePos, pressed):
             return( "home")

@@ -66,7 +66,7 @@ while running:
             if pygame.time.get_ticks() - jumpscare_start_time > 60:
                 show_jumpscare = False
                 
-        print(chosenWord)
+        
 
         
         if lives <= 0:
@@ -116,7 +116,7 @@ while running:
     
     if game_state == "game Over":
         gameOverPage.displayWord(font, w, screen, reputation.reputation)
-        state = gameOverPage.update(screen, pygame.mouse, mousePos, pressed)
+        state = gameOverPage.update(screen, pygame.mouse, mousePos, pressed, font)
         keypad.reset()
         if state == "home":
             game_state = "home"
