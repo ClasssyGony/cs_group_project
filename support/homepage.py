@@ -121,8 +121,8 @@ class Settings:
         
     
     def update(self, screen, mouse,mousePos, pressed):
-        # l = pygame.image.load("support/assets/levels/1.png").convert_alpha()
-        # screen.blit(l,(0,0))
+        j = pygame.image.load("support/assets/settings/1.png").convert_alpha()
+        screen.blit(j,(0,0))
         if self.backButton.update(screen, mouse,mousePos, pressed):
             return "home"
         
@@ -156,7 +156,7 @@ class GameOver:
 
         t = "Total reputation:  " + str(totalRepp)
         
-        #reputation not showing on screen
+        
 
         
 
