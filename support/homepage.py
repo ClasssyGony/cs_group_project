@@ -166,5 +166,6 @@ class GameOver:
         totalRepRect = totalRep.get_rect()
         totalRepRect.center = (500, 500)
         screen.blit(totalRep, totalRepRect)
+        
         if self.homeButton.update(screen, mouse,mousePos, pressed):
             return( "home")

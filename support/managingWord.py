@@ -36,7 +36,7 @@ def pickWord(wordList, reputation):
 
 #checking user input
 def checkInput(userInput, chosenWord):
-    global codedWord
+    global codedWordS
     correct = False
     wrong = False
     for i in range(len(chosenWord)):
@@ -67,7 +67,7 @@ def displayWord(screen,font,chosenWord):
     codedWordRect = displayedCodedWord.get_rect()
     codedWordRect.center = (750, 125)
 
-    #showing the real word to make it easier
+    #showing the real word to make it easierS
     #displayRealWord = font.render(chosenWord, True, (0, 0, 0), (255, 255, 255))
     #displayReadWordRect = displayRealWord.get_rect()
     #displayReadWordRect.center = (30, 30)
