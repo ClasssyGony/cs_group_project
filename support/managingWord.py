@@ -36,7 +36,7 @@ def pickWord(wordList, reputation):
 
 #checking user input
 def checkInput(userInput, chosenWord):
-    global codedWordS
+    global codedWord
     correct = False
     wrong = False
     for i in range(len(chosenWord)):
